@@ -126,7 +126,7 @@ $products = [
                     <img src="<?= $prod->img; ?>" class="card-img-top" alt="Immagine di <?= $prod->name; ?>">
                     <div class="card-body p-2 border-secondary ">
                         <h5 class="card-title text-success"><?= $prod->name; ?></h5>
-                        <p class="card-text">Prezzo: € <?= $prod->price; ?></p>
+                        <p class="card-text">Prezzo: € <?= number_format($prod->price, 2); ?></p>
                         <p class="card-text">Categoria: <i class="<?= $prod->animal[$index % count($prod->animal)]->icon; ?>"></i></p>
                         <p class="card-text text-danger">Tipo di prodotto: <?= $prod->prodType; ?></p>
                         <a href="#" class="btn btn-primary">Acquista</a>
