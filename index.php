@@ -8,94 +8,12 @@ icona della categoria ed il tipo di articolo che si sta visualizzando (prodotto,
 -->
 
 
-<?php
-
-// definizioni classi + function
-class Toy { 
-
-    public function __construct(public int $id, public string $name, public array $animal, public string $prodType, public string $img, public float $price) 
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->animal = $animal; 
-        $this->prodType = $prodType;
-        $this->img = $img; 
-        $this->price = $price;
-    }
-};
-
-// Costruttore della classe Food
-class Food { 
-
-    public function __construct(public int $id, public string $name, public array $animal, public string $prodType, public string $img, public float $price) 
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->animal = $animal; 
-        $this->prodType = $prodType;
-        $this->img = $img; 
-        $this->price = $price;
-    }
-};
-
-class kennel { 
-
-    public function __construct(public int $id, public string $name, public array $animal, public string $prodType, public string $img, public float $price) 
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->animal = $animal; 
-        $this->prodType = $prodType;
-        $this->img = $img; 
-        $this->price = $price;
-    }
-};
-
-class Category {
-    public function __construct(public string $name, public string $icon) 
-    {
-        $this->name = $name;
-        $this->icon = $icon;
-    }
-};
-// Creazione delle istanze
-
-$cats = new Category('Cats', 'fa-solid fa-cat');
-$dogs = new Category('Dogs', 'fa-solid fa-dog');
-
-$category = [$cats, $dogs];
 
 
-// arrays
-$foods = [
-    new Food( 1, 'Crocchette vegetali', $category, 'Cibo', 'https://picsum.photos/200/300', 10.00),
-    new Food( 2, 'Crocchete secchi', $category, 'Cibo', 'https://picsum.photos/200/300', 5.00) 
-    
+<?php include 'products_data.php'; ?>
 
-];
 
-$kennels = [
-    new kennel( 1, 'Cuccia esterna', $category, 'Cucce', 'https://picsum.photos/200/300', 14.50),
-    new kennel( 2, 'Cuccia da interno', $category, 'Cucce', 'https://picsum.photos/200/300', 45.00),
-    new kennel( 3, 'Cuccia in legno', $category, 'Cucce', 'https://picsum.photos/200/300', 65.50)
-    ];
 
-$toys = [
-    new Toy( 1, 'Bistecca di gomma', $category, 'Giochi', 'https://picsum.photos/200/300', 9.60),
-    new Toy( 2, 'Pallina da tennis', $category, 'Giochi', 'https://picsum.photos/200/300', 5.60),
-    new Toy( 2, 'Osso di plastica', $category, 'Giochi', 'https://picsum.photos/200/300', 10.50),
-];
-
-//var_dump($products);
-
-// Raggruppamento degli array
-$products = [
-    $foods,
-    $kennels,
-    $toys
-]
-
-?>
 
 <!doctype html>
 <html lang="en">
@@ -106,10 +24,59 @@ $products = [
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
-        <style>
+
+    </head>
+
+    <body>
+        <header class=" bg-light rounded-3  text-green p-3 d-flex">
+           
+        <div class="logo-circle  ">
+            <img src="./img/pupa.jpg" alt="Logo">
+        </div>
+
+            <div class="container w-50 ">
+
+                <h1>PuP Shop-Online</h1>
+            </div>
+
+            <div class="container w-25 " >
+            <ul class="header-icons list-unstyled mb-0 ml-auto w-80">
+                <i class="fa-solid fa-angle-down"></i>
+                <li><i class="fas fa-shopping-cart"></i></li>  
+                <i class="fa-solid fa-angle-down"></i>
+                <li><i class="fas fa-heart"></i></li>
+                <i class="fa-solid fa-angle-down"></i>
+                <li><i class="fas fa-user"></i></li>
+            </ul>
+            </div>
+        </header>
+       
+    <main>
+    <div class="container w-80 mb-3">
+    <h3 class="mt-4 mb-2 text-green ">Prodotti per animali</h3>
+    <div class="row">
+        <?php foreach($products as $product) : ?>
+            <?php foreach($product as $index => $prod) : ?>
+                <div class="card bg-gradient mb-2 " style="width: 18rem;">
+                    <img src="<?= $prod->img; ?>" class="card-img-top" alt="Immagine di <?= $prod->name; ?>">
+                    <div class="card-body p-2 border-secondary ">
+                        <h5 class="card-title text-success"><?= $prod->name; ?></h5>
+                        <p class="card-text">Prezzo: € <?= number_format($prod->price, 2); ?></p>
+                        <p class="card-text">Categoria: <i class="<?= $prod->animal[$index % count($prod->animal)]->icon; ?>"></i></p>
+                        <p class="card-text text-danger">Tipo di prodotto: <?= $prod->prodType; ?></p>
+                        <a href="#" class="btn ">Acquista</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+
+<style>
         .logo-circle {
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             overflow: hidden;
             margin-left: 15px;
@@ -134,59 +101,12 @@ $products = [
             background-color: lightgreen;
             border: solid 1px green;
         }
+    
         body{
             background-color: rgb(144, 238, 144);
         }
 
     </style>
-    </head>
-
-    <body>
-        <header class=" bg-light rounded-3  text-green p-3 d-flex">
-           
-        <div class="logo-circle  ">
-            <img src="pupa.jpg" alt="Logo">
-        </div>
-
-            <div class="container w-50 ">
-
-                <h1>PuP Shop-Online</h1>
-            </div>
-
-            <div class="container w-25 " >
-            <ul class="header-icons list-unstyled mb-0 ml-auto w-80">
-                <i class="fa-solid fa-angle-down"></i>
-                <li><i class="fas fa-shopping-cart"></i></li>  
-                <i class="fa-solid fa-angle-down"></i>  
-                <li><i class="fas fa-shopping-cart"></i></li>
-                <i class="fa-solid fa-angle-down"></i>
-                <li><i class="fas fa-heart"></i></li>
-                <i class="fa-solid fa-angle-down"></i>
-                <li><i class="fas fa-user"></i></li>
-            </ul>
-            </div>
-        </header>
-       
-    <main>
-    <div class="container w-80 mb-3">
-    <h3 class="mt-4 mb-2 text-green ">Prodotti per animali</h3>
-    <div class="row">
-        <?php foreach($products as $product) : ?>
-            <?php foreach($product as $index => $prod) : ?>
-                <div class="card bg-gradient  mb-2" style="width: 18rem;">
-                    <img src="<?= $prod->img; ?>" class="card-img-top" alt="Immagine di <?= $prod->name; ?>">
-                    <div class="card-body p-2 border-secondary ">
-                        <h5 class="card-title text-success"><?= $prod->name; ?></h5>
-                        <p class="card-text">Prezzo: € <?= number_format($prod->price, 2); ?></p>
-                        <p class="card-text">Categoria: <i class="<?= $prod->animal[$index % count($prod->animal)]->icon; ?>"></i></p>
-                        <p class="card-text text-danger">Tipo di prodotto: <?= $prod->prodType; ?></p>
-                        <a href="#" class="btn ">Acquista</a>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        <?php endforeach; ?>
-    </div>
-</div>
 
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
