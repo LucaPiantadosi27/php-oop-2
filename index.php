@@ -9,7 +9,7 @@ icona della categoria ed il tipo di articolo che si sta visualizzando (prodotto,
 
 <!-- include -->
 <?php include 'products_data.php'; ?>
-
+<!--  -->
 
 <!doctype html>
 <html lang="en">
@@ -41,23 +41,23 @@ icona della categoria ed il tipo di articolo che si sta visualizzando (prodotto,
     </header>
     <main>
         <div class="container w-80 mb-3">
-            <h3 class="mt-4 mb-2 text-green">Prodotti per animali</h3>
-            <div class="row">
-                <?php foreach($products as $productGroup) : ?>
-                    <?php foreach($productGroup as $product) : ?>
-                        <div class="card bg-gradient mb-2" style="width: 18rem;">
-                            <img src="<?= $product->img; ?>" class="card-img-top" alt="Immagine di <?= $product->name; ?>">
-                            <div class="card-body p-2 border-secondary">
-                                <h5 class="card-title text-success"><?= $product->name; ?></h5>
-                                <p class="card-text">Prezzo: € <?= number_format($product->price, 2); ?></p>
-                                <p class="card-text">Categoria: <i class="<?= $product->categories[0]->icon; ?>"></i></p>
-                                <p class="card-text text-danger">Tipo di prodotto: <?= $product->prodType; ?></p>
-                                <a href="#" class="btn">Acquista</a>
-                            </div>
+        <h3 class="mt-4 mb-2 text-green ">Prodotti per animali</h3>
+        <div class="row">
+            <?php foreach($products as $product) : ?>
+                <?php foreach($product as $index => $prod) : ?>
+                    <div class="card bg-gradient  mb-2" style="width: 18rem;">
+                        <img src="<?= $prod->img; ?>" class="card-img-top" alt="Immagine di <?= $prod->name; ?>">
+                        <div class="card-body p-2 border-secondary ">
+                            <h5 class="card-title text-success"><?= $prod->name; ?></h5>
+                            <p class="card-text">Prezzo: € <?= number_format($prod->price, 2); ?></p>
+                            <p class="card-text">Categoria: <i class="<?= $prod->animal[$index % count($prod->animal)]->icon; ?>"></i></p>
+                            <p class="card-text text-danger">Tipo di prodotto: <?= $prod->prodType; ?></p>
+                            <a href="#" class="btn ">Acquista</a>
                         </div>
-                    <?php endforeach; ?>
+                    </div>
                 <?php endforeach; ?>
-            </div>
+            <?php endforeach; ?>
+        </div>
         </div>
     </main>
 
