@@ -8,7 +8,8 @@ icona della categoria ed il tipo di articolo che si sta visualizzando (prodotto,
 -->
 
 <!-- include -->
-<?php include 'products_data.php'; ?>
+<?php include 'products_data.php' ?>;
+
 <!--  -->
 
 <!doctype html>

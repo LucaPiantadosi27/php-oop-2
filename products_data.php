@@ -1,7 +1,8 @@
 <?php
-
+require './Traits/PriceFormatter.php';
 // definizioni classi + function
 class Toy { 
+    use PriceFormatter;
 
     public function __construct(public int $id, public string $name, public array $animal, public string $prodType, public string $img, public float $price) 
     {
@@ -16,6 +17,7 @@ class Toy {
 
 // Costruttore della classe Food
 class Food { 
+    use PriceFormatter;
 
     public function __construct(public int $id, public string $name, public array $animal, public string $prodType, public string $img, public float $price) 
     {
@@ -29,6 +31,7 @@ class Food {
 };
 
 class kennel { 
+    use PriceFormatter;
 
     public function __construct(public int $id, public string $name, public array $animal, public string $prodType, public string $img, public float $price) 
     {
@@ -83,6 +86,8 @@ $products = [
     $foods,
     $kennels,
     $toys
-]
+];
+
+// var_dump($products);
 
 ?>
